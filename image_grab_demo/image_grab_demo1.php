@@ -15,6 +15,7 @@ class image_grab_demo1
 	*/
 	public function getsource($url)
     {
+    	//将图片读入字符串中
     	$str = @file_get_contents($url);
 	    if(empty($str))
 	    {
@@ -31,13 +32,16 @@ class image_grab_demo1
     */
     public function downloadImg($imgurl)
  	{
+ 		//函数以数组的形式返回文件路径的信息
 	    $imginfo = pathinfo($imgurl);
 	    $imgpath = IMG_PATH.$imginfo['basename'];
 	    if(file_exists($imgpath))
 	    {
 	      return false;
 	    }
+	    //将图片读入字符串中
 	    $imgdata = $this->getsource($imgurl);
+	    //把字符串写入文件中
 	    $imgres = file_put_contents($imgpath, $imgdata);
 	    if(empty($imgres))
 	    {
